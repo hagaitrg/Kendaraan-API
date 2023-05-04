@@ -15,6 +15,7 @@ class CreateMobilsTable extends Migration
     {
         Schema::create('mobils', function (Blueprint $table) {
             $table->text('id');
+            $table->text('kendaraan_id');
             $table->string('mesin');
             $table->string('kapasitas_penumpang');
             $table->string('tipe');

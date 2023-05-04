@@ -68,6 +68,18 @@ class UserController extends Controller
         return $this->res->sendSuccess(200, 'Successfully created token', $this->generateToken($jwt_token));
     }
 
+    public function logout()
+    {
+        auth()->logout();
+
+        return $this->res->sendSuccess(200, 'Successfully Logged Out', null);
+    }
+
+    public function refresh()
+    {
+        return $this->generateToken(auth()->refresh());
+    }
+
     protected function generateToken($token)
     {
         return response()->json([

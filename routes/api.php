@@ -18,4 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function(){
     Route::post('login', [UserController::class, 'login']);
     Route::post('register', [UserController::class, 'register']);
+
+    Route::group(['middleware'=>['jwt.verify']], function(){
+        Route::get('logout', [UserController::class, 'logout']);
+        Route::get('refresh', [UserController::class, 'refresh']);
+    });
 });
