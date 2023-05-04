@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Kendaraan extends Model
+class Kendaraan extends Eloquent
 {
     use HasFactory;
     protected $connection = 'mongodb';
     protected $collection = 'kendaraans';
 
-    public $fillabel = [
-        'id', 'warna','harga'
+    protected $guarded = [];  
+    protected $fillabel = [
+        'id','tahun_keluaran', 'warna','harga'
     ];
 
     public function kendaraanParent()

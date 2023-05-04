@@ -14,10 +14,10 @@ class CreateMobilsTable extends Migration
     public function up()
     {
         Schema::create('mobils', function (Blueprint $table) {
-            $table->text('id');
+            $table->text('uuid');
             $table->text('kendaraan_id');
             $table->string('mesin');
-            $table->string('kapasitas_penumpang');
+            $table->integer('kapasitas_penumpang');
             $table->string('tipe');
             $table->timestamps();
         });

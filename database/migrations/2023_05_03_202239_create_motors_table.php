@@ -14,7 +14,7 @@ class CreateMotorsTable extends Migration
     public function up()
     {
         Schema::create('motors', function (Blueprint $table) {
-            $table->text('id');
+            $table->text('uuid');
             $table->text('kendaraan_id');
             $table->string('mesin');
             $table->string('tipe_suspensi');

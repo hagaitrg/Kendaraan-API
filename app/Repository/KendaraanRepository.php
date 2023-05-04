@@ -12,7 +12,9 @@ interface KendaraanInterface
     public function createKendaraan($tahun, $warna, $harga);
     public function createMobil($kendaraan_id,$mesin, $kapasitas, $tipe);
     public function createMotor($kendaraan_id, $mesin, $suspensi, $transmisi);
-    public function getAllKendaraan();
+    public function fetchKendaraan();
+    public function fetchMobil();
+    public function fetchMotor();
 }
 
 class KendaraanRepository implements KendaraanInterface
@@ -58,10 +60,23 @@ class KendaraanRepository implements KendaraanInterface
         return $data;
     }
 
-    public function getAllKendaraan()
+    public function fetchKendaraan()
     {
         $data = Kendaraan::all();
 
         return $data;
     }
+
+    public function fetchMobil()
+    {
+        $data = Mobil::all();
+        return $data;
+    }
+
+    public function fetchMotor()
+    {
+        $data = Motor::all();
+        return $data;
+    }
+
 }

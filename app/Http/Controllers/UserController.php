@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Repository\ResponseRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -32,7 +33,9 @@ class UserController extends Controller
         }
 
         try {
+            $uuid = Str::uuid()->toString();
             $data = User::create([
+                "uuid" => $uuid,
                 "name" => $request->name,
                 "email" => $request->email,
                 "password" => bcrypt($request->password)

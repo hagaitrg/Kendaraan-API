@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,5 +23,11 @@ Route::prefix('v1')->group(function(){
     Route::group(['middleware'=>['jwt.verify']], function(){
         Route::get('logout', [UserController::class, 'logout']);
         Route::get('refresh', [UserController::class, 'refresh']);
+
+        Route::prefix('kendaraans')->group(function(){
+            Route::get('/', [KendaraanController::class, 'index']);
+            Route::post('/mobil', [KendaraanController::class, 'storeMobil']);
+            Route::post('/motor', [KendaraanController::class, 'storeMotor']);
+        });
     });
 });

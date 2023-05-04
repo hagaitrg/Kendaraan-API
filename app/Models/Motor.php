@@ -11,7 +11,7 @@ class Motor extends Kendaraan
     protected $connection = 'mongodb';
     protected $collection = 'motors';
 
-    public $fillable = [
+    protected $fillable = [
         'id','kendaraan_id','mesin', 'tipe_asuransi', 'tipe_transmisi'
     ];
 

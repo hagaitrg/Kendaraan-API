@@ -11,7 +11,7 @@ class Mobil extends Kendaraan
     protected $connection = 'mongodb';
     protected $collection = 'mobils';
 
-    public $fillable = [
+    protected $fillable = [
         'id', 'kendaraan_id','mesin', 'kapasitas_penumpang', 'tipe'
     ];
 
