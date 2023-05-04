@@ -11,7 +11,13 @@ class Mobil extends Kendaraan
     protected $connection = 'mongodb';
     protected $collection = 'mobils';
 
-    protected $fillable = [
-        'id', 'mesin', 'kapasitas_penumpang', 'tipe'
+    public $fillable = [
+        'id', 'kendaraan_id','mesin', 'kapasitas_penumpang', 'tipe'
     ];
+
+    public function kendaraan()
+    {
+        return $this->morphOne(Kendaraan::class, 'kendaraanParent');
+    }
+  
 }

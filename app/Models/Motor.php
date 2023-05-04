@@ -11,7 +11,12 @@ class Motor extends Kendaraan
     protected $connection = 'mongodb';
     protected $collection = 'motors';
 
-    protected $fillable = [
-        'id', 'mesin', 'tipe_asuransi', 'tipe_transmisi'
+    public $fillable = [
+        'id','kendaraan_id','mesin', 'tipe_asuransi', 'tipe_transmisi'
     ];
+
+    public function kendaraan()
+    {
+        return $this->morphOne(Kendaraan::class, 'kendaraanParent');
+    }
 }

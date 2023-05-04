@@ -15,6 +15,7 @@ class CreateKendaraansTable extends Migration
     {
         Schema::create('kendaraans', function (Blueprint $table) {
             $table->text('id');
+            $table->year('tahun_keluaran');
             $table->string('warna');
             $table->bigInteger('harga');
             $table->timestamps();

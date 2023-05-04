@@ -12,7 +12,12 @@ class Kendaraan extends Model
     protected $connection = 'mongodb';
     protected $collection = 'kendaraans';
 
-    protected $fillabel = [
+    public $fillabel = [
         'id', 'warna','harga'
     ];
+
+    public function kendaraanParent()
+    {
+        return $this->morphTo();
+    }
 }
