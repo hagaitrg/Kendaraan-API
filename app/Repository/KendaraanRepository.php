@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Models\Kendaraan;
 use App\Models\Mobil;
 use App\Models\Motor;
+use App\Models\Penjualan;
 use Illuminate\Support\Str;
 
 interface KendaraanInterface
@@ -12,9 +13,11 @@ interface KendaraanInterface
     public function createKendaraan($tahun, $warna, $harga);
     public function createMobil($kendaraan_id,$mesin, $kapasitas, $tipe);
     public function createMotor($kendaraan_id, $mesin, $suspensi, $transmisi);
+    public function sellKendaraan($kendaraan_id, $trans_code, $kuantitas);
     public function fetchKendaraan();
     public function fetchMobil();
     public function fetchMotor();
+    public function fetchOneKendaraan($id);
 }
 
 class KendaraanRepository implements KendaraanInterface
@@ -23,7 +26,7 @@ class KendaraanRepository implements KendaraanInterface
     {
         $uuid = Str::uuid()->toString();
         $data = Kendaraan::create([
-            "id" => $uuid,
+            "uuid" => $uuid,
             "tahun_keluaran" => $tahun,
             "warna" => $warna,
             "harga" => $harga
@@ -36,7 +39,7 @@ class KendaraanRepository implements KendaraanInterface
     {
         $uuid = Str::uuid()->toString();
         $data = Mobil::create([
-            "id" => $uuid,
+            "uuid" => $uuid,
             "kendaraan_id" => $kendaraan_id,
             "mesin" => $mesin,
             "kapasitas_penumpang" => $kapasitas,
@@ -50,11 +53,24 @@ class KendaraanRepository implements KendaraanInterface
     {
         $uuid = Str::uuid()->toString();
         $data = Motor::create([
-            "id" => $uuid,
+            "uuid" => $uuid,
             "kendaraan_id" => $kendaraan_id,
             "mesin" => $mesin,
             "tipe_suspensi" => $suspensi,
             "tipe_transmisi" => $transmisi
+        ]);
+
+        return $data;
+    }
+
+    public function sellKendaraan($kendaraan_id, $trans_code, $kuantitas)
+    {
+        $uuid = Str::uuid()->toString();
+        $data = Penjualan::create([
+            'uuid' => $uuid,
+            'kendaraan_id' => $kendaraan_id,
+            'trans_code' => $trans_code,
+            'kuantitas' => $kuantitas
         ]);
 
         return $data;
@@ -76,6 +92,13 @@ class KendaraanRepository implements KendaraanInterface
     public function fetchMotor()
     {
         $data = Motor::all();
+        return $data;
+    }
+
+    public function fetchOneKendaraan($id)
+    {
+        $data = Kendaraan::where('uuid', $id)->take(1)->get();
+
         return $data;
     }
 

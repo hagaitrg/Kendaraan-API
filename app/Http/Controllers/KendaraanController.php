@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penjualan;
 use App\Repository\KendaraanRepository;
 use App\Repository\ResponseRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -78,5 +80,41 @@ class KendaraanController extends Controller
         } catch (\Throwable $th) {
             return $this->res->sendError(500, 'Failed to create mobil', $th->getMessage());
         }
+    }
+
+    public function penjualan(Request $request, $kendaraanId)
+    {
+        $validator = Validator::make($request->all(), [
+            'kuantitas' => 'required|integer',
+            'amount' => 'required|integer'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->res->sendError(400, $validator->errors(), null);
+        }
+
+        $checkKendaraan = $this->kendaraan->fetchOneKendaraan($kendaraanId);
+        if (!$checkKendaraan) {
+            return $this->res->sendError(404, "Kendaraan not found!", null);
+        }
+
+        if ($request->amount < $checkKendaraan[0]->harga) {
+            return $this->res->sendError(400, "Unable to buy kendaraan", null);
+        }
+
+        try {
+            $data = $this->kendaraan->sellKendaraan($kendaraanId, $this->generateTransCode($kendaraanId), $request->kuantitas);
+            return $this->res->sendSuccess(200, 'Successfully sell Kendaraan', $data);
+        } catch (\Throwable $th) {
+            return $this->res->sendError(500, 'Failed to sell kendaraan', $th->getMessage());
+        }
+
+    }
+
+    protected function generateTransCode($kendaraanId)
+    {
+        $transCode = "TR-".Carbon::now()->format('Ymd')."-".substr($kendaraanId, -4);
+
+        return $transCode;
     }
 }

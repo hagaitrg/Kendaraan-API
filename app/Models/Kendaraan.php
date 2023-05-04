@@ -14,11 +14,16 @@ class Kendaraan extends Eloquent
 
     protected $guarded = [];  
     protected $fillabel = [
-        'id','tahun_keluaran', 'warna','harga'
+        'uuid','tahun_keluaran', 'warna','harga'
     ];
 
     public function kendaraanParent()
     {
         return $this->morphTo();
+    }
+
+    public function penjualan()
+    {
+        return $this->hasOne(Penjualan::class);
     }
 }

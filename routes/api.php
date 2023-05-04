@@ -25,9 +25,13 @@ Route::prefix('v1')->group(function(){
         Route::get('refresh', [UserController::class, 'refresh']);
 
         Route::prefix('kendaraans')->group(function(){
-            Route::get('/', [KendaraanController::class, 'index']);
+            Route::get('/', [KendaraanController::class, 'stockKendaraan']);
             Route::post('/mobil', [KendaraanController::class, 'storeMobil']);
             Route::post('/motor', [KendaraanController::class, 'storeMotor']);
+        });
+
+        Route::prefix('penjualans')->group(function(){
+            Route::post('/{kendaraanId}', [KendaraanController::class, 'penjualan']);
         });
     });
 });

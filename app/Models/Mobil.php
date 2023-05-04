@@ -12,7 +12,7 @@ class Mobil extends Kendaraan
     protected $collection = 'mobils';
 
     protected $fillable = [
-        'id', 'kendaraan_id','mesin', 'kapasitas_penumpang', 'tipe'
+        'uuid', 'kendaraan_id','mesin', 'kapasitas_penumpang', 'tipe'
     ];
 
     public function kendaraan()
