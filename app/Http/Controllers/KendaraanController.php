@@ -108,7 +108,16 @@ class KendaraanController extends Controller
         } catch (\Throwable $th) {
             return $this->res->sendError(500, 'Failed to sell kendaraan', $th->getMessage());
         }
+    }
 
+    public function getPenjualan($penjualanId)
+    {
+        try {
+            $data = $this->kendaraan->fetchOnePenjualan($penjualanId);
+            return $this->res->sendSuccess(200, "Successfully get data penjualan", $data);
+        } catch (\Throwable $th) {
+            return $this->res->sendError(500, "Failed to get data penjualan", $th->getMessage());
+        }
     }
 
     protected function generateTransCode($kendaraanId)

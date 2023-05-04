@@ -32,6 +32,7 @@ Route::prefix('v1')->group(function(){
 
         Route::prefix('penjualans')->group(function(){
             Route::post('/{kendaraanId}', [KendaraanController::class, 'penjualan']);
+            Route::get('/{penjualanId}', [KendaraanController::class, 'getPenjualan']);
         });
     });
 });

@@ -18,6 +18,7 @@ interface KendaraanInterface
     public function fetchMobil();
     public function fetchMotor();
     public function fetchOneKendaraan($id);
+    public function fetchOnePenjualan($id);
 }
 
 class KendaraanRepository implements KendaraanInterface
@@ -98,6 +99,13 @@ class KendaraanRepository implements KendaraanInterface
     public function fetchOneKendaraan($id)
     {
         $data = Kendaraan::where('uuid', $id)->take(1)->get();
+
+        return $data;
+    }
+
+    public function fetchOnePenjualan($id)
+    {
+        $data = Penjualan::where('uuid', $id)->take(1)->get();
 
         return $data;
     }
